@@ -68,10 +68,13 @@ def main():
     if len(picked) < 3:
         picked = [r for r in all_reviews if r["rating"] >= MIN_RATING - 1]
 
+    # a name search misses this listing (Google has it as "Care", the site says
+    # "Center"), so pin the link to the place's CID
+    PLACE_URL = "https://www.google.com/maps?cid=12660524401894847045"
     out = {
         "rating": d.get("rating", 5),
         "count": d.get("userRatingCount", 0),
-        "url": d.get("googleMapsUri", ""),
+        "url": PLACE_URL,
         "reviews": picked,
     }
     os.makedirs("assets", exist_ok=True)

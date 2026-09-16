@@ -1,26 +1,12 @@
 /* ---------------------------------------------------------------
-   Dr. Brinda's Dental — site behaviour
-   Change CAL_LINK to the real cal.com link once the account exists.
+   Dr. Brinda's Dental - site behaviour
 ---------------------------------------------------------------- */
-const CAL_LINK = "brindasclinic/consultation"; // cal.com/<this>
 
 /* nav: solid on scroll + mobile menu */
 const nav = document.getElementById("nav");
-const burger = document.getElementById("burger");
 const onScroll = () => nav.classList.toggle("solid", scrollY > 24);
 addEventListener("scroll", onScroll, { passive: true });
 onScroll();
-
-burger.addEventListener("click", () => {
-  const open = nav.classList.toggle("open");
-  burger.setAttribute("aria-expanded", open);
-});
-document.getElementById("navLinks").addEventListener("click", e => {
-  if (e.target.tagName === "A") {
-    nav.classList.remove("open");
-    burger.setAttribute("aria-expanded", "false");
-  }
-});
 
 /* scroll reveal */
 const io = new IntersectionObserver((entries, obs) => {
@@ -92,60 +78,6 @@ fetch("assets/reviews.json", { cache: "no-cache" })
     }
   })
   .catch(() => { /* static markup in index.html stands in */ });
-
-/* cal.com inline embed */
-(function (C, A, L) {
-  let p = function (a, ar) { a.q.push(ar); };
-  let d = C.document;
-  C.Cal = C.Cal || function () {
-    let cal = C.Cal, ar = arguments;
-    if (!cal.loaded) {
-      cal.ns = {}; cal.q = cal.q || [];
-      d.head.appendChild(d.createElement("script")).src = A;
-      cal.loaded = true;
-    }
-    if (ar[0] === L) {
-      const api = function () { p(api, arguments); };
-      const ns = ar[1];
-      api.q = api.q || [];
-      typeof ns === "string" ? (cal.ns[ns] = cal.ns[ns] || api) && p(cal.ns[ns], ar) && p(cal, ["initNamespace", ns]) : p(cal, ar);
-      return;
-    }
-    p(cal, ar);
-  };
-})(window, "https://app.cal.com/embed/embed.js", "init");
-
-Cal("init", { origin: "https://app.cal.com" });
-Cal("inline", {
-  elementOrSelector: "#cal-inline",
-  calLink: CAL_LINK,
-  config: { layout: "month_view" }
-});
-Cal("ui", {
-  theme: "light",
-  cssVarsPerTheme: { light: { "cal-brand": "#C9A227" } },
-  hideEventTypeDetails: false,
-  layout: "month_view"
-});
-
-/* if the Cal embed never renders (bad link / blocked / offline), show a fallback
-   so the booking section is never a blank white box */
-setTimeout(() => {
-  const shell = document.getElementById("cal-inline");
-  if (!shell || shell.querySelector("iframe")) return;
-  shell.innerHTML =
-    '<div style="padding:44px;text-align:center;font-family:var(--sans)">' +
-    '<h3 style="margin-bottom:12px">Book by phone or WhatsApp</h3>' +
-    '<p style="color:var(--muted);font-size:.95rem">Online booking is being set up. ' +
-    'Reach us directly &mdash; we reply during clinic hours.</p>' +
-    '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:22px">' +
-    '<a class="btn btn-gold" href="tel:+918217317171">Call 8217 317 171</a>' +
-    '<a class="btn btn-ghost" href="https://wa.me/918217317171" target="_blank" rel="noopener">WhatsApp</a>' +
-    '</div></div>';
-  shell.style.minHeight = "auto";
-  shell.style.display = "grid";
-  shell.style.placeItems = "center";
-}, 5000);
 
 /* implant render - one object, cheap enough for phones too, and fetched only
    when its section is actually approaching */

@@ -68,11 +68,6 @@ section{padding-block:clamp(72px,9vw,128px)}
 .nav-links a:hover{color:var(--navy)}
 .nav-links a:hover::after{width:100%}
 .nav .btn{padding:12px 24px}
-.burger{display:none;margin-left:auto;background:none;border:0;padding:10px;cursor:pointer}
-.burger span{display:block;width:24px;height:1.5px;background:var(--navy);margin:5px 0;transition:.3s}
-.nav.open .burger span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-.nav.open .burger span:nth-child(2){opacity:0}
-.nav.open .burger span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
 /* ---- hero ---- */
 .hero{position:relative;padding-top:150px;padding-bottom:0;overflow:hidden}
@@ -181,7 +176,6 @@ section{padding-block:clamp(72px,9vw,128px)}
 .book-info ul{padding:0;margin:26px 0 0}
 .book-info li b{color:#fff;font-weight:600;display:block;margin-bottom:2px}
 .book-info svg{width:20px;height:20px;stroke:var(--gold-soft);fill:none;stroke-width:1.5;flex:none;margin-top:3px}
-.cal-shell{background:#fff;border-radius:var(--radius);min-height:620px;overflow:hidden;box-shadow:var(--shadow)}
 
 /* ---- contact ---- */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
@@ -198,21 +192,7 @@ footer li{margin-bottom:11px}
 footer a:hover{color:var(--gold-soft)}
 .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-block:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem}
 
-/* ---- sticky mobile bar ---- */
-.dock{
-  position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;
-  grid-template-columns:1fr 1fr 1.2fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-  background:rgba(251,249,246,.94);backdrop-filter:blur(14px);border-top:1px solid var(--line);
-}
-.dock a{display:flex;align-items:center;justify-content:center;gap:7px;padding:13px 6px;border-radius:12px;font:600 13px var(--sans)}
-.dock .call{background:var(--white);border:1px solid var(--line);color:var(--navy)}
-.dock .wa{background:#25D366;color:#fff}
-.dock .bk{background:var(--gold);color:#fff}
 
-/* float whatsapp desktop */
-.wa-float{position:fixed;right:22px;bottom:22px;z-index:65;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 30px -8px rgba(37,211,102,.8);transition:.25s}
-.wa-float:hover{transform:scale(1.08)}
-.wa-float svg{width:28px;height:28px;fill:#fff}
 
 /* ---- reveal ---- */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
@@ -230,18 +210,6 @@ footer a:hover{color:var(--gold-soft)}
   .stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
   .gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
   .foot-grid{grid-template-columns:1fr 1fr}
-  .nav-links{
-    position:fixed;inset:78px 0 auto;flex-direction:column;gap:0;background:var(--ivory);
-    border-bottom:1px solid var(--line);padding:8px 24px 22px;display:none;
-  }
-  .nav.open .nav-links{display:flex}
-  .nav.open{background:var(--ivory)}
-  .nav-links a{padding:14px 0;border-bottom:1px solid var(--line);font-size:1rem}
-  .burger{display:block}
-  .nav .btn{display:none}
-  .dock{display:grid}
-  .wa-float{display:none}
-  body{padding-bottom:72px}
 }
 @media(max-width:600px){
   .svc-grid,.why-grid,.foot-grid{grid-template-columns:1fr}
@@ -395,3 +363,54 @@ img.avatar{object-fit:cover}
 }
 .credit a{color:rgba(255,255,255,.52);text-decoration:underline;text-underline-offset:2px}
 .credit a:hover{color:var(--gold-soft)}
+
+/* ---- header actions: call + whatsapp, on every screen ------------------ */
+.nav-cta{display:flex;align-items:center;gap:10px;margin-left:auto}
+.nav-links{margin-left:auto}
+.nav-links + .nav-cta{margin-left:28px}
+.nav-cta .btn{padding:11px 18px;gap:8px}
+.ic{width:17px;height:17px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7}
+.ic.solid{fill:currentColor;stroke:none}
+.btn-call{color:var(--navy);border-color:rgba(14,31,51,.22)}
+.btn-wa{background:#25D366;color:#fff;box-shadow:0 10px 24px -12px rgba(37,211,102,.9)}
+.btn-wa:hover{background:#1db855;transform:translateY(-2px)}
+
+/* ---- booking: two large targets instead of a scheduler ---------------- */
+.book-actions{display:grid;gap:16px}
+.book-card{
+  display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto auto;
+  column-gap:18px;align-items:start;padding:28px 30px;border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);
+  transition:.25s ease;
+}
+.book-card .ic{grid-row:1/4;width:30px;height:30px;stroke-width:1.5;margin-top:4px}
+.book-card .lbl{font:600 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-soft)}
+.book-card .val{font-family:var(--serif);font-size:1.6rem;line-height:1.2;color:#fff;margin-top:8px}
+.book-card .sub{font-size:.88rem;color:rgba(255,255,255,.55);margin-top:6px}
+.book-card:hover{transform:translateY(-3px);border-color:transparent;box-shadow:var(--shadow)}
+.book-card.call:hover{background:var(--gold);}
+.book-card.call:hover .lbl{color:rgba(255,255,255,.85)}
+.book-card.call:hover .sub{color:rgba(255,255,255,.8)}
+.book-card.wa{border-color:rgba(37,211,102,.3)}
+.book-card.wa .ic{color:#25D366}
+.book-card.wa:hover{background:#25D366}
+.book-card.wa:hover .ic{color:#fff}
+.book-card.wa:hover .lbl{color:rgba(255,255,255,.85)}
+.book-card.wa:hover .sub{color:rgba(255,255,255,.85)}
+
+@media(max-width:980px){
+  /* no hamburger: the two actions are the nav on a phone */
+  .nav-links{display:none}
+  .nav-in{gap:12px;height:68px}
+  .brand{font-size:1.02rem}
+  .brand img{width:28px}
+  .nav-cta{gap:8px}
+  .nav-cta .btn{padding:10px 14px;font-size:13px}
+  .nav-cta .btn span{display:none}
+  .nav-cta .btn .ic{width:19px;height:19px}
+  .nav{background:rgba(251,249,246,.92);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+  html{scroll-padding-top:76px}
+}
+@media(max-width:400px){
+  .brand-txt{display:none}
+}
