@@ -174,7 +174,7 @@
       // the GLB ships upright, centred, base at y = 0 - only height to match
       const h = new THREE.Box3().setFromObject(mesh).getSize(new THREE.Vector3()).y;
       mesh.scale.setScalar(0.92 / h);
-      mesh.position.y = 0.46;
+      mesh.position.y = 0.53;          // collar top is 0.59 - the cut hides inside
       mesh.rotation.y = Math.PI / 6;
 
       implant.remove(crown);
@@ -188,8 +188,11 @@
     (function abutment() {
       const pts = [];
       const P = (x, y) => pts.push(new THREE.Vector2(x, y));
-      P(0.00, 0.00); P(0.46, 0.00); P(0.50, 0.10);
-      P(0.46, 0.34); P(0.40, 0.52); P(0.00, 0.54);
+      // flares up to meet the crown margin. The crown is a scan cut at the
+      // cervix, and that cut edge has to seat inside this collar or it reads
+      // as a tooth sliced off in mid-air.
+      P(0.00, 0.00); P(0.42, 0.00); P(0.46, 0.08); P(0.50, 0.20);
+      P(0.58, 0.34); P(0.68, 0.46); P(0.735, 0.55); P(0.00, 0.57);
       const g = new THREE.LatheGeometry(pts, 64);
       const m = new THREE.Mesh(g, titanium);
       m.position.y = 0.02;
