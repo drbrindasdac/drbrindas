@@ -388,3 +388,10 @@ img.avatar{object-fit:cover}
   #implant-stage{aspect-ratio:4/3;max-height:420px}
   .stage-note{display:none}   /* collides with the post at this size */
 }
+
+/* CC BY attribution for the scanned molar - required by the licence */
+.credit{
+  margin:14px 0 0;font-size:11px;line-height:1.6;color:rgba(255,255,255,.34);
+}
+.credit a{color:rgba(255,255,255,.52);text-decoration:underline;text-underline-offset:2px}
+.credit a:hover{color:var(--gold-soft)}

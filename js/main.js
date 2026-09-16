@@ -156,7 +156,7 @@ setTimeout(() => {
       if (!es[0].isIntersecting) return;
       o.disconnect();
       const el = document.createElement("script");
-      el.src = "js/implant.js"; el.defer = true;
+      el.src = "js/implant.js"; el.type = "module";
       document.body.appendChild(el);
     }, { rootMargin: "400px" }).observe(st);
   }

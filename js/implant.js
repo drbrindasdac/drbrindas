@@ -12,14 +12,11 @@
     if (!(c.getContext("webgl2") || c.getContext("webgl"))) return;
   } catch (e) { return; }
 
-  const src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js";
-  new Promise((res, rej) => {
-    if (window.THREE) return res();
-    const s = document.createElement("script");
-    s.src = src; s.onload = res; s.onerror = rej;
-    document.head.appendChild(s);
-  }).then(() => {
-    const THREE = window.THREE;
+  Promise.all([
+    import("three"),
+    import("three/addons/loaders/GLTFLoader.js")
+  ]).then(([THREE, gltf]) => {
+    const GLTFLoader = gltf.GLTFLoader;
     const W = () => stage.clientWidth, H = () => stage.clientHeight;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -78,11 +75,9 @@
     const implant = new THREE.Group();
 
     /* ---- crown: a real molar ------------------------------------------
-       Built as a grid, not from a sphere. A sphere puts a pole exactly where
-       the occlusal table belongs, which is what turned the last attempt into
-       a mushroom. Here the walls rise to a flat table, and the table carries
-       four cusps around a central fossa.                                 */
-    (function crown() {
+       Shown immediately, then replaced by the scan below once it arrives -
+       and kept for good if the model fails to load.                      */
+    function proceduralCrown() {
       const NU = 96;          // around
       const JW = 40;          // rings up the wall
       const JC = 16;          // rings across the table
@@ -150,8 +145,44 @@
       const m = new THREE.Mesh(g, enamel);
       m.position.y = 0.46;
       m.rotation.y = Math.PI / 7;      // cusps read better off-axis
-      implant.add(m);
-    })();
+      return m;
+    }
+
+    /* ---- crown: photogrammetry scan ------------------------------------
+       "Mandibular First Molar" by University of Dundee, School of Dentistry,
+       CC BY 4.0 - https://skfb.ly/HzvD. Credited on the page, as the licence
+       requires. Reduced 3.0MB -> 568KB offline: roots cut at the cervix (an
+       implant replaces the root, so they would be wrong here), stood upright,
+       4k PNG texture to a 1k JPEG, vertex colours dropped, 16-bit indices. */
+    let crown = proceduralCrown();
+    implant.add(crown);
+
+    new GLTFLoader().load("assets/molar.glb", g => {
+      let mesh = null;
+      g.scene.traverse(o => { if (o.isMesh && !mesh) mesh = o; });
+      if (!mesh) return;
+
+      const tex = mesh.material.map;
+      if (tex) tex.colorSpace = THREE.SRGBColorSpace;
+      mesh.material = new THREE.MeshPhysicalMaterial({
+        map: tex, color: 0xffffff, roughness: 0.34, metalness: 0,
+        clearcoat: 0.9, clearcoatRoughness: 0.15,
+        sheen: 0.4, sheenColor: new THREE.Color(0xffeedb),
+        envMapIntensity: 0.8
+      });
+
+      // the GLB ships upright, centred, base at y = 0 - only height to match
+      const h = new THREE.Box3().setFromObject(mesh).getSize(new THREE.Vector3()).y;
+      mesh.scale.setScalar(0.92 / h);
+      mesh.position.y = 0.46;
+      mesh.rotation.y = Math.PI / 6;
+
+      implant.remove(crown);
+      crown.geometry.dispose();
+      crown = mesh;
+      implant.add(crown);
+      fit();
+    }, undefined, () => { /* procedural crown stays */ });
 
     /* ---- abutment: the collar between crown and screw ---- */
     (function abutment() {
