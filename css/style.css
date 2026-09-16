@@ -348,3 +348,50 @@ img.avatar{object-fit:cover}
 @media(prefers-reduced-motion:reduce){
   .hero-frame img{animation:none;transform:none}
 }
+
+/* ---- implant showcase --------------------------------------------------- */
+.implant{background:var(--navy);color:#fff;overflow:hidden}
+.implant .eyebrow{color:var(--gold-soft)}
+.implant .eyebrow::before{background:var(--gold-soft)}
+.implant h2{color:#fff}
+.implant .lede{color:rgba(255,255,255,.66)}
+.implant .align-facts{border-top-color:rgba(255,255,255,.14)}
+.implant .align-facts b{color:var(--gold-soft)}
+.implant .align-facts small{color:rgba(255,255,255,.5)}
+.implant-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+
+#implant-stage{
+  position:relative;aspect-ratio:1/1;border-radius:var(--radius);
+  background:
+    radial-gradient(70% 55% at 50% 40%, rgba(201,162,39,.20), transparent 68%),
+    radial-gradient(120% 100% at 50% 50%, #17293f 0%, #0B1828 72%);
+  border:1px solid rgba(255,255,255,.07);overflow:hidden;
+}
+/* monogram watermark, so the panel still reads as designed if WebGL never
+   starts (reduced motion, no GPU, blocked CDN) */
+#implant-stage::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:url(../assets/logo.png) center/38% no-repeat;
+  opacity:.10;filter:grayscale(1) brightness(2);
+}
+/* a floor glow, so the object sits in the frame rather than floating in a void */
+#implant-stage::after{
+  content:"";position:absolute;left:50%;bottom:11%;translate:-50% 0;
+  width:56%;height:12%;border-radius:50%;
+  background:radial-gradient(closest-side, rgba(201,162,39,.30), transparent 72%);
+  filter:blur(10px);pointer-events:none;
+}
+.implant-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;opacity:0;transition:opacity 1s ease}
+#implant-stage.implant-live .implant-canvas{opacity:1}
+.stage-note{
+  position:absolute;left:50%;bottom:20px;translate:-50% 0;z-index:2;
+  font:500 10px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);opacity:0;transition:opacity .8s ease .6s;
+}
+#implant-stage.implant-live .stage-note{opacity:1}
+
+@media(max-width:980px){
+  .implant-grid{grid-template-columns:1fr;gap:38px}
+  #implant-stage{aspect-ratio:4/3;max-height:420px}
+  .stage-note{display:none}   /* collides with the post at this size */
+}

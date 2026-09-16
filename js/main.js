@@ -147,4 +147,19 @@ setTimeout(() => {
   shell.style.placeItems = "center";
 }, 5000);
 
+/* implant render - one object, cheap enough for phones too, and fetched only
+   when its section is actually approaching */
+{
+  const st = document.getElementById("implant-stage");
+  if (st) {
+    new IntersectionObserver((es, o) => {
+      if (!es[0].isIntersecting) return;
+      o.disconnect();
+      const el = document.createElement("script");
+      el.src = "js/implant.js"; el.defer = true;
+      document.body.appendChild(el);
+    }, { rootMargin: "400px" }).observe(st);
+  }
+}
+
 document.getElementById("yr").textContent = new Date().getFullYear();
