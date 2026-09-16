@@ -91,7 +91,7 @@ section{padding-block:clamp(72px,9vw,128px)}
 .hero .lede{margin-top:22px;font-size:1.1rem}
 .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
 .hero-media{position:relative}
-.hero-media img{border-radius:var(--radius);box-shadow:var(--shadow);aspect-ratio:4/5;object-fit:cover;width:100%}
+
 .hero-badge{
   position:absolute;left:-28px;bottom:42px;background:var(--white);border-radius:14px;
   padding:18px 22px;box-shadow:var(--shadow);display:flex;gap:14px;align-items:center;
@@ -222,7 +222,7 @@ footer a:hover{color:var(--gold-soft)}
 @media(max-width:980px){
   .hero-grid,.align-grid,.book-grid,.contact-grid,.doc-grid{grid-template-columns:1fr}
   .hero{padding-top:118px}
-  .hero-media img{aspect-ratio:3/2}
+  .hero-frame{aspect-ratio:3/2}
   .hero-badge{left:auto;right:14px;bottom:-24px;padding:14px 18px}
   .svc-grid,.why-grid{grid-template-columns:repeat(2,1fr)}
   .stats-in{grid-template-columns:repeat(2,1fr)}
@@ -314,34 +314,37 @@ img.avatar{object-fit:cover}
   .gal a:nth-child(1){grid-column:span 1;grid-row:span 1}
 }
 
-/* ---- hero 3D stage ---------------------------------------------------- */
-#stage{
-  position:relative;width:100%;aspect-ratio:4/5;border-radius:var(--radius);
-  overflow:hidden;box-shadow:var(--shadow);background:
-    radial-gradient(115% 85% at 50% 18%, #1d3350 0%, #132437 38%, #0B1828 100%);
-  touch-action:pan-y;
+/* ---- hero photo frame -------------------------------------------------
+   A slow push-in and a warm vignette do most of the work here, so the hero
+   carries itself whatever photo is dropped in. Swap assets/hero-clinic.jpg.
+----------------------------------------------------------------------- */
+.hero-frame{
+  position:relative;margin:0;width:100%;aspect-ratio:4/5;
+  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+  background:var(--ivory-2);isolation:isolate;
 }
-#stage img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  transition:opacity .9s ease;
+.hero-frame img{
+  width:100%;height:100%;object-fit:cover;
+  transform-origin:58% 42%;
+  animation:kenburns 28s ease-in-out infinite alternate;
 }
-.stage-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity 1.1s ease}
-#stage.stage-live img{opacity:0}
-#stage.stage-live .stage-canvas{opacity:1}
-
-.stage-hint{
-  position:absolute;right:16px;top:16px;z-index:2;
-  font:500 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(255,255,255,.72);background:rgba(11,24,40,.5);backdrop-filter:blur(8px);
-  border:1px solid rgba(232,217,160,.28);padding:9px 16px;border-radius:999px;
-  opacity:0;transition:opacity .6s ease .8s;pointer-events:none;
+@keyframes kenburns{
+  from{transform:scale(1.005)}
+  to{transform:scale(1.085)}
 }
-#stage.stage-live .stage-hint{opacity:1}
-#stage.stage-live:hover .stage-hint{opacity:0;transition-delay:0s}
-
-@media(max-width:980px){
-  #stage{aspect-ratio:3/2}
+/* warm vignette + a gold wash in the upper corner, tying the photo to the palette */
+.hero-frame::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(85% 60% at 78% 8%, rgba(201,162,39,.20), transparent 62%),
+    radial-gradient(120% 100% at 50% 50%, transparent 52%, rgba(14,31,51,.30) 100%);
+  mix-blend-mode:multiply;
+}
+/* hairline inner edge, so the photo reads as framed rather than cropped */
+.hero-frame::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);
 }
 @media(prefers-reduced-motion:reduce){
-  .stage-hint{display:none}
+  .hero-frame img{animation:none;transform:none}
 }
