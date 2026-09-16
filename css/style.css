@@ -367,13 +367,6 @@ img.avatar{object-fit:cover}
     radial-gradient(120% 100% at 50% 50%, #17293f 0%, #0B1828 72%);
   border:1px solid rgba(255,255,255,.07);overflow:hidden;
 }
-/* monogram watermark, so the panel still reads as designed if WebGL never
-   starts (reduced motion, no GPU, blocked CDN) */
-#implant-stage::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:url(../assets/logo.png) center/38% no-repeat;
-  opacity:.10;filter:grayscale(1) brightness(2);
-}
 /* a floor glow, so the object sits in the frame rather than floating in a void */
 #implant-stage::after{
   content:"";position:absolute;left:50%;bottom:11%;translate:-50% 0;

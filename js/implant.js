@@ -77,26 +77,79 @@
 
     const implant = new THREE.Group();
 
-    /* ---- crown: a molar, cusped ---- */
+    /* ---- crown: a real molar ------------------------------------------
+       Built as a grid, not from a sphere. A sphere puts a pole exactly where
+       the occlusal table belongs, which is what turned the last attempt into
+       a mushroom. Here the walls rise to a flat table, and the table carries
+       four cusps around a central fossa.                                 */
     (function crown() {
-      const pts = [];
-      const P = (x, y) => pts.push(new THREE.Vector2(x, y));
-      P(0.00, 0.00); P(0.52, 0.02); P(0.70, 0.14); P(0.80, 0.38);
-      P(0.84, 0.66); P(0.82, 0.95); P(0.72, 1.16); P(0.52, 1.30);
-      P(0.28, 1.37); P(0.00, 1.39);
-      const g = new THREE.LatheGeometry(pts, 64);
-      const p = g.attributes.position;
-      for (let i = 0; i < p.count; i++) {
-        const y = p.getY(i);
-        if (y > 0.9) {                        // occlusal cusps
-          const x = p.getX(i), z = p.getZ(i);
-          const k = (y - 0.9) / 0.5;
-          p.setY(i, y - Math.cos(x * 3.1) * Math.cos(z * 3.1) * 0.30 * k);
+      const NU = 96;          // around
+      const JW = 40;          // rings up the wall
+      const JC = 16;          // rings across the table
+      const RX = 0.80, RZ = 0.68, HH = 0.92;
+      const CUSP = 0.21, FOSSA = 0.11;
+
+      // rounded-square cross-section - molars are not circular
+      const squish = th => {
+        const c = Math.abs(Math.cos(th)), s2 = Math.abs(Math.sin(th));
+        return 1 / Math.pow(Math.pow(c, 3.4) + Math.pow(s2, 3.4), 1 / 3.4);
+      };
+      // silhouette: narrow cervix, bulge at the waist, slight taper to the table
+      const profile = w => 0.74 + 0.26 * Math.sin(Math.PI * (0.15 + 0.75 * w));
+      const lobe = th => 0.5 - 0.5 * Math.cos(4 * th);          // four cusps
+      const ridge = q => Math.exp(-Math.pow((q - 0.76) / 0.30, 2));
+      const edgeLift = th => CUSP * lobe(th) * ridge(1);
+      const smooth = (a, b, x) => {
+        const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
+        return t * t * (3 - 2 * t);
+      };
+
+      const pos = [], idx = [];
+      const ring = (th, r, y) => pos.push(Math.cos(th) * r * RX, y, Math.sin(th) * r * RZ);
+
+      // walls
+      for (let j = 0; j <= JW; j++) {
+        const w = j / JW;
+        for (let i = 0; i <= NU; i++) {
+          const th = (i / NU) * Math.PI * 2;
+          ring(th, profile(w) * squish(th), HH * w + edgeLift(th) * smooth(0.70, 1, w));
         }
       }
-      p.needsUpdate = true; g.computeVertexNormals();
+      // occlusal table, edge inward
+      for (let j = 1; j <= JC; j++) {
+        const q = 1 - j / JC;
+        for (let i = 0; i <= NU; i++) {
+          const th = (i / NU) * Math.PI * 2;
+          const y = HH + CUSP * lobe(th) * ridge(q) - FOSSA * Math.pow(1 - q, 2.2);
+          ring(th, profile(1) * squish(th) * q, y);
+        }
+      }
+      // flat base, so it seats on the abutment
+      const baseStart = pos.length / 3;
+      for (let i = 0; i <= NU; i++) {
+        const th = (i / NU) * Math.PI * 2;
+        ring(th, profile(0) * squish(th) * 0.92, -0.02);
+      }
+      pos.push(0, -0.02, 0);
+      const centre = pos.length / 3 - 1;
+
+      const rows = JW + JC + 1;
+      for (let j = 0; j < rows - 1; j++) {
+        for (let i = 0; i < NU; i++) {
+          const a = j * (NU + 1) + i, b = a + NU + 1;
+          idx.push(a, b, a + 1, a + 1, b, b + 1);
+        }
+      }
+      for (let i = 0; i < NU; i++) idx.push(centre, baseStart + i + 1, baseStart + i);
+
+      const g = new THREE.BufferGeometry();
+      g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+      g.setIndex(idx);
+      g.computeVertexNormals();
+
       const m = new THREE.Mesh(g, enamel);
-      m.position.y = 0.50;
+      m.position.y = 0.46;
+      m.rotation.y = Math.PI / 7;      // cusps read better off-axis
       implant.add(m);
     })();
 
