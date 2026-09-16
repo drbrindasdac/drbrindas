@@ -54,3 +54,37 @@ treatment if useful, and change `CAL_LINK` to a team/routing link.
 
 Everything lives in `index.html`. Phone number appears in several places —
 search for `8217317171` to change all of them.
+
+## Google reviews (auto-refreshing)
+
+`assets/reviews.json` feeds the reviews rail. It is refreshed every Monday by
+`.github/workflows/reviews.yml`, which runs `scripts/fetch_reviews.py` against
+the Google Places API. The API key lives in a repo secret, never in the browser.
+
+**Setup:**
+
+1. Google Cloud Console → new project → enable **Places API (New)**.
+2. Enable billing (the $200/month free credit covers this many times over —
+   two API calls per week costs effectively nothing).
+3. Create an API key, restrict it to the Places API.
+4. GitHub repo → Settings → Secrets and variables → Actions → new secret
+   named `GOOGLE_MAPS_API_KEY`.
+5. Actions tab → "Refresh Google reviews" → Run workflow, to test it.
+
+**Knobs** (env vars, set them in the workflow if you want to change them):
+
+| Var | Default | Meaning |
+|---|---|---|
+| `MIN_RATING` | `5` | Only show reviews at or above this. Drops to 4★ automatically if fewer than 3 five-star reviews come back. |
+| `PLACE_QUERY` | the clinic's name + address | What to search for on Google. |
+
+**Limits worth knowing:** the Places API returns a maximum of **5 reviews** per
+place — there is no way to get all 107. The script also syncs the JSON-LD
+`aggregateRating` in `index.html` to the live rating and review count, so the
+Google rich card never shows numbers the page cannot back up.
+
+Run it locally to test:
+
+```
+GOOGLE_MAPS_API_KEY=xxx python3 scripts/fetch_reviews.py
+```

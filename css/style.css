@@ -263,3 +263,8 @@ footer a:hover{color:var(--gold-soft)}
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
 }
+
+/* review avatars pulled from Google */
+img.avatar{object-fit:cover}
+.quote .who a{text-decoration:none}
+.quote .who a:hover b{color:var(--gold)}

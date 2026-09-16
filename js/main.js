@@ -83,6 +83,46 @@ if (ba) {
   set(50);
 }
 
+/* ---- Google reviews ----------------------------------------------------
+   assets/reviews.json is refreshed weekly by .github/workflows/reviews.yml.
+   The markup already in index.html is the fallback, so a failed fetch or a
+   stale cache still leaves a populated rail.
+------------------------------------------------------------------------ */
+fetch("assets/reviews.json", { cache: "no-cache" })
+  .then(r => r.ok ? r.json() : Promise.reject(r.status))
+  .then(data => {
+    const rail = document.querySelector(".rail");
+    if (!rail || !data.reviews || !data.reviews.length) return;
+
+    const esc = t => { const d = document.createElement("div"); d.textContent = t; return d.innerHTML; };
+
+    rail.innerHTML = data.reviews.map(r => {
+      const stars = "\u2605".repeat(Math.round(r.rating));
+      const avatar = r.photo
+        ? `<img class="avatar" src="${esc(r.photo)}" alt="" loading="lazy" referrerpolicy="no-referrer">`
+        : `<span class="avatar">${esc(r.author.trim()[0] || "G")}</span>`;
+      const name = r.url
+        ? `<a href="${esc(r.url)}" target="_blank" rel="noopener"><b>${esc(r.author)}</b></a>`
+        : `<b>${esc(r.author)}</b>`;
+      return `<figure class="quote in">
+        <div class="stars">${stars}</div>
+        <p>&ldquo;${esc(r.text)}&rdquo;</p>
+        <figcaption class="who">${avatar}<span>${name}<small>${esc(r.when)} &middot; Google</small></span></figcaption>
+      </figure>`;
+    }).join("");
+    rail.scrollLeft = 0;   // innerHTML swap can leave the rail snapped mid-scroll
+
+    // headline + "read all" link follow whatever Google currently says
+    const h = document.querySelector("#reviews h2");
+    if (h && data.rating) h.textContent = `${data.rating.toFixed(1)} on Google, earned one visit at a time.`;
+    const more = document.querySelector('#reviews a.btn');
+    if (more && data.url) {
+      more.href = data.url;
+      if (data.count) more.textContent = `Read all ${data.count} reviews on Google`;
+    }
+  })
+  .catch(() => { /* static markup in index.html stands in */ });
+
 /* cal.com inline embed */
 (function (C, A, L) {
   let p = function (a, ar) { a.q.push(ar); };
