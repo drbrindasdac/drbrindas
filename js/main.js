@@ -147,4 +147,20 @@ setTimeout(() => {
   shell.style.placeItems = "center";
 }, 5000);
 
+/* hero 3D arch - only fetched once the hero is actually on screen, and never
+   on a narrow screen where the photo is the better trade */
+if (innerWidth >= 700) {
+  const stage = document.getElementById("stage");
+  if (stage) {
+    new IntersectionObserver((es, o) => {
+      if (!es[0].isIntersecting) return;
+      o.disconnect();
+      const s = document.createElement("script");
+      s.src = "js/arch.js";
+      s.defer = true;
+      document.body.appendChild(s);
+    }, { rootMargin: "200px" }).observe(stage);
+  }
+}
+
 document.getElementById("yr").textContent = new Date().getFullYear();
