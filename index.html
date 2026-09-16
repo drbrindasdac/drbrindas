@@ -37,7 +37,9 @@
     {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"20:00"}
   ],
   "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"107"},
-  "medicalSpecialty":"Dentistry"
+  "medicalSpecialty":"Dentistry",
+  "sameAs":["https://www.instagram.com/drbrindascare/"],
+  "availableService":[{"@type":"MedicalProcedure","name":"Dental Implants"},{"@type":"MedicalProcedure","name":"Clear Aligners"},{"@type":"MedicalProcedure","name":"Smile Design"},{"@type":"MedicalProcedure","name":"Teeth Whitening"},{"@type":"MedicalProcedure","name":"Root Canal Treatment"},{"@type":"MedicalProcedure","name":"Crowns and Bridges"},{"@type":"MedicalProcedure","name":"Orthodontic Treatment"},{"@type":"MedicalProcedure","name":"Tooth Extractions"},{"@type":"MedicalProcedure","name":"Surgical Extractions"},{"@type":"MedicalProcedure","name":"Gum Treatments"},{"@type":"MedicalProcedure","name":"Pediatric Dentistry"},{"@type":"MedicalProcedure","name":"Dental Fillings"},{"@type":"MedicalProcedure","name":"Preventive Care"}]
 }
 </script>
 </head>
@@ -46,11 +48,11 @@
 <!-- ===== NAV ===== -->
 <header class="nav" id="nav">
   <div class="nav-in">
-    <a href="#top" class="brand">Dr. Brinda&rsquo;s Dental<span>&amp; Aesthetic Center</span></a>
+    <a href="#top" class="brand"><img src="assets/logo.png" alt="" width="420" height="440"><span class="brand-txt">Dr. Brinda&rsquo;s Dental<small>&amp; Aesthetic Center</small></span></a>
     <nav class="nav-links" id="navLinks">
       <a href="#services">Services</a>
       <a href="#doctors">Doctors</a>
-      <a href="#results">Results</a>
+      <a href="#aligners">Aligners</a>
       <a href="#reviews">Reviews</a>
       <a href="#visit">Visit</a>
     </nav>
@@ -90,7 +92,7 @@
         <div class="stat"><div class="num" data-count="1000" data-suffix="+">0</div><small>Happy Patients</small></div>
         <div class="stat"><div class="num" data-count="7" data-suffix="+">0</div><small>Years Experience</small></div>
         <div class="stat"><div class="num">4.9<span style="color:var(--gold)">★</span></div><small>Google Rating</small></div>
-        <div class="stat"><div class="num" data-count="12" data-suffix="">0</div><small>Treatments Offered</small></div>
+        <div class="stat"><div class="num" data-count="15" data-suffix="">0</div><small>Treatments Offered</small></div>
       </div>
     </div>
   </div>
@@ -108,40 +110,50 @@
 
       <article class="svc reveal">
         <svg viewBox="0 0 24 24"><path d="M12 21c-1.6 0-2-3.5-2-6 0-1.5-1-2-2.2-1.4C6.2 14.4 5 13 5 10.5 5 6.9 7.6 4 11 4c.9 0 1.6.3 2 .6.4-.3 1.1-.6 2-.6 3.4 0 6 2.9 6 6.5 0 2.5-1.2 3.9-2.8 3.1C17 13 16 13.5 16 15c0 2.5-.4 6-2 6" stroke-linejoin="round"/></svg>
+        <span class="tag">Our specialty</span>
         <h3>Dental Implants</h3>
-        <p>Permanent, natural-looking replacement for missing teeth. Guided placement, titanium fixtures, lifetime of chewing confidence.</p>
+        <p>Permanent tooth replacement with natural-looking, long-lasting results &mdash; placed by an oral and maxillofacial surgeon, not referred out.</p>
       </article>
 
       <article class="svc reveal">
         <svg viewBox="0 0 24 24"><path d="M4 8.5C4 6 6.7 4.5 12 4.5S20 6 20 8.5c0 3.4-1.6 5.5-3.3 8.1-.9 1.4-1.6 2.9-4.7 2.9s-3.8-1.5-4.7-2.9C5.6 14 4 11.9 4 8.5Z" stroke-linejoin="round"/><path d="M4.8 10h14.4"/></svg>
         <h3>Clear Aligners</h3>
-        <p>Straighten teeth invisibly with Aesthalign. No metal brackets, removable for meals, scanned and planned digitally.</p>
+        <p>Aesthalign clear aligners under MDS orthodontic supervision. Invisible, removable, and planned in 3D before you start.</p>
       </article>
 
       <article class="svc reveal">
         <svg viewBox="0 0 24 24"><path d="M12 3.5 13.9 9l5.6.2-4.4 3.5 1.6 5.4L12 15l-4.7 3.1 1.6-5.4L4.5 9.2 10.1 9 12 3.5Z" stroke-linejoin="round"/></svg>
-        <h3>Smile Design</h3>
-        <p>Veneers, contouring and whitening designed around your face &mdash; previewed digitally before a single tooth is touched.</p>
+        <h3>Smile Design &amp; Whitening</h3>
+        <p>Cosmetic work designed around your face &mdash; veneers, contouring and professional whitening for a result that still looks like you.</p>
       </article>
 
       <article class="svc reveal">
         <svg viewBox="0 0 24 24"><path d="M12 20c-1.5 0-1.8-3.2-1.8-5.6 0-1.4-.9-1.9-2-1.3C6.7 13.8 5.6 12.5 5.6 10.2c0-3.3 2.4-6 5.5-6 .8 0 1.5.3 1.9.6" stroke-linejoin="round"/><path d="M15 4.5c3 .2 5.3 2.8 5.3 6 0 2.3-1.1 3.6-2.6 2.9-1.1-.6-2 0-2 1.3 0 2.4-.3 5.6-1.8 5.6"/><path d="M12.2 8v6"/></svg>
         <h3>Root Canal Treatment</h3>
-        <p>Single-sitting RCT under magnification. Saves the natural tooth, and patients consistently describe it as painless.</p>
+        <p>Saves the natural tooth instead of losing it. Patients consistently describe the procedure here as painless &mdash; read the reviews below.</p>
       </article>
 
       <article class="svc reveal">
         <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 12h8M12 8v8"/></svg>
-        <h3>Oral Surgery</h3>
-        <p>Wisdom tooth removal, extractions and minor surgical procedures &mdash; done cleanly, with quick, comfortable recovery.</p>
+        <h3>Oral &amp; Surgical Procedures</h3>
+        <p>Wisdom teeth, surgical extractions and minor oral surgery, handled in-house by a maxillofacial surgeon with quick, comfortable recovery.</p>
       </article>
 
       <article class="svc reveal">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7.5v4.8l3.2 1.9"/></svg>
         <h3>Preventive &amp; Kids Care</h3>
-        <p>Cleanings, fluoride, sealants and gentle paediatric visits. The cheapest dentistry is the treatment you never need.</p>
+        <p>Check-ups, cleanings, fillings, gum treatment and gentle paediatric visits. The cheapest dentistry is the treatment you never need.</p>
       </article>
 
+    </div>
+
+    <div class="svc-all reveal">
+      <div class="svc-col"><h4>General &amp; Preventive</h4><ul><li>General Dentistry</li><li>Dental Fillings</li><li>Root Canal Treatment</li><li>Gum Treatments</li><li>Pediatric Dentistry</li><li>Preventive Care</li></ul></div>
+      <div class="svc-col"><h4>Surgical</h4><ul><li>Tooth Extractions</li><li>Surgical Extractions</li><li>Oral Surgical Procedures</li></ul></div>
+      <div class="svc-col"><h4>Restorative</h4><ul><li>Dental Implants</li><li>Crowns &amp; Bridges</li></ul></div>
+      <div class="svc-col"><h4>Orthodontics</h4><ul><li>Orthodontic Treatment</li><li>Clear Aligners</li></ul></div>
+      <div class="svc-col"><h4>Cosmetic</h4><ul><li>Smile Design</li><li>Teeth Whitening</li></ul></div>
+      <div class="svc-col cta"><h4>Not sure what you need?</h4><p>Come in for an assessment &mdash; you will be told what needs doing, what can wait, and what it costs.</p><a class="btn btn-gold" href="#book">Book a consultation</a></div>
     </div>
   </div>
 </section>
@@ -152,46 +164,94 @@
     <div class="head reveal">
       <div class="eyebrow">The Team</div>
       <h2 style="color:#fff">Treated by the people who planned it.</h2>
-      <p class="lede">No rotating locums. The doctor who examines you is the doctor who treats you.</p>
+      <p class="lede">A small, permanent team. The doctor who examines you is the doctor who treats you.</p>
     </div>
     <div class="doc-grid">
       <article class="doc reveal">
-        <img src="assets/dr-brinda.jpg" alt="Dr. Brinda V." width="300" height="400" loading="lazy">
+        <img src="assets/dr-brinda.jpg" alt="Dr. Brinda V." width="600" height="800" loading="lazy">
         <div>
           <h3>Dr. Brinda V.</h3>
-          <div class="role">BDS &middot; Founder &amp; Chief Dental Surgeon</div>
-          <p>Leads restorative and aesthetic care at the clinic, with a focus on smile design, implants and full-mouth rehabilitation.</p>
+          <div class="role">Oral &amp; Maxillofacial Surgeon &middot; Founder</div>
+          <p>Seven years of surgical training combined with aesthetic and medical expertise. She founded the clinic on surgical precision, ethical decision-making and uncompromising clinical standards.</p>
+          <ul class="quals">
+            <li>BDS</li>
+            <li>Oral &amp; Maxillofacial Surgery</li>
+            <li>Diploma in Cosmetology</li>
+            <li>Diploma in Trichology</li>
+            <li>Laser-certified</li>
+          </ul>
         </div>
       </article>
+
       <article class="doc reveal">
-        <img src="assets/dr-swaroop.jpg" alt="Dr. Swaroop Kumar K P" width="300" height="400" loading="lazy">
+        <img src="assets/dr-swaroop.jpg" alt="Dr. Swaroop Kumar K P" width="600" height="800" loading="lazy">
         <div>
           <h3>Dr. Swaroop Kumar K P</h3>
-          <div class="role">MDS &middot; Oral &amp; Maxillofacial Surgeon</div>
-          <p>Handles surgical extractions, implant placement and complex oral surgery &mdash; known for calm, thorough explanations.</p>
+          <div class="role">Orthodontist &amp; Dentofacial Orthopedist &middot; Clinical Manager</div>
+          <p>Specialises in premium orthodontic and aligner-based treatment. He oversees clinical workflows, treatment protocols and quality standards across the practice.</p>
+          <ul class="quals">
+            <li>BDS</li>
+            <li>MDS &mdash; Orthodontics</li>
+            <li>Clear Aligner Specialist</li>
+            <li>Diploma in Nutrition</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- TODO: replace name, role, bio and qualifications with the real team member -->
+      <article class="doc reveal">
+        <img src="assets/staff-1.jpg" alt="" width="600" height="800" loading="lazy">
+        <div>
+          <h3>Dr. Nanditha</h3>
+          <div class="role">Dental Surgeon</div>
+          <p>Handles restorative and prosthetic work &mdash; crowns, bridges and everyday dentistry. Patients single her out in reviews for her patience and unhurried explanations.</p>
+          <ul class="quals">
+            <li>BDS</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- TODO: replace name, role, bio and qualifications with the real team member -->
+      <article class="doc reveal">
+        <img src="assets/staff-2.jpg" alt="" width="600" height="800" loading="lazy">
+        <div>
+          <h3>Clinical Team</h3>
+          <div class="role">Dental Assistants &amp; Front Desk</div>
+          <p>The people who sterilise every instrument, chase your follow-up call and fit you in when something hurts on a Saturday evening.</p>
+          <ul class="quals">
+            <li>Sterilisation protocol</li>
+            <li>Patient coordination</li>
+          </ul>
         </div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ===== RESULTS / BEFORE-AFTER ===== -->
-<section id="results">
+<!-- ===== AESTHALIGN ===== -->
+<section id="aligners">
   <div class="wrap">
-    <div class="ba-wrap">
+    <div class="align-grid">
       <div class="reveal">
-        <div class="eyebrow">Real Results</div>
-        <h2>The difference, drag by drag.</h2>
-        <p class="lede">Every case here was treated at our Rajajinagar clinic and shared with patient consent. Drag the handle to see the before and after.</p>
-        <a href="#book" class="btn btn-gold" style="margin-top:22px">Start Your Case</a>
+        <div class="eyebrow">Aesthalign Clear Aligners</div>
+        <h2>Straighten your teeth without anyone noticing.</h2>
+        <p class="lede">Aesthalign is the clinic&rsquo;s premium clear aligner system, planned and supervised by Dr. Swaroop Kumar K P, MDS Orthodontics. Crystal-clear trays, no metal brackets, no food restrictions &mdash; and you see the finished result in 3D before treatment begins.</p>
+        <div class="align-facts">
+          <div><b>6&ndash;18</b><small>months, typically</small></div>
+          <div><b>20&ndash;22</b><small>hours of wear a day</small></div>
+          <div><b>3D</b><small>preview before you start</small></div>
+        </div>
+        <div class="hero-cta">
+          <a href="#book" class="btn btn-gold">Book a free aligner consultation</a>
+        </div>
       </div>
-      <div class="ba reveal" id="ba">
-        <img class="before" src="assets/before.jpg" alt="Smile before treatment" loading="lazy">
-        <img class="after" src="assets/after.jpg" alt="Smile after treatment" loading="lazy">
-        <span class="ba-tag l">Before</span>
-        <span class="ba-tag r">After</span>
-        <div class="ba-handle" id="baHandle" role="slider" tabindex="0" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></div>
-      </div>
+
+      <ol class="steps reveal">
+        <li><span>01</span><div><b>Free consultation</b>A detailed smile assessment and 3D digital scan with Dr. Swaroop.</div></li>
+        <li><span>02</span><div><b>Custom treatment plan</b>See your transformation in a 3D preview before committing to anything.</div></li>
+        <li><span>03</span><div><b>Your aligners arrive</b>Precision-crafted from medical-grade material for your teeth alone.</div></li>
+        <li><span>04</span><div><b>Progress monitoring</b>Regular reviews under expert orthodontic supervision until it is right.</div></li>
+      </ol>
     </div>
   </div>
 </section>
@@ -242,12 +302,9 @@
       <h2>A space designed to lower your heart rate.</h2>
     </div>
     <div class="gal">
-      <a href="assets/clinic-1.jpg" class="reveal"><img src="assets/clinic-1.jpg" alt="Clinic reception" loading="lazy"></a>
-      <a href="assets/clinic-2.jpg" class="reveal"><img src="assets/clinic-2.jpg" alt="Treatment chair" loading="lazy"></a>
-      <a href="assets/clinic-3.jpg" class="reveal"><img src="assets/clinic-3.jpg" alt="Sterilization area" loading="lazy"></a>
-      <a href="assets/clinic-4.jpg" class="reveal"><img src="assets/clinic-4.jpg" alt="Digital imaging equipment" loading="lazy"></a>
-      <a href="assets/clinic-5.jpg" class="reveal"><img src="assets/clinic-5.jpg" alt="Consultation room" loading="lazy"></a>
-      <a href="assets/clinic-6.jpg" class="reveal"><img src="assets/clinic-6.jpg" alt="Waiting lounge" loading="lazy"></a>
+      <a href="assets/clinic-1.jpg" target="_blank" rel="noopener" class="reveal"><img src="assets/clinic-1.jpg" alt="Treatment room at the clinic" loading="lazy"></a>
+      <a href="assets/clinic-2.jpg" target="_blank" rel="noopener" class="reveal"><img src="assets/clinic-2.jpg" alt="Second operatory" loading="lazy"></a>
+      <a href="assets/clinic-3.jpg" target="_blank" rel="noopener" class="reveal"><img src="assets/clinic-3.jpg" alt="Operatory with natural light" loading="lazy"></a>
     </div>
   </div>
 </section>
@@ -287,6 +344,7 @@
         <div class="hero-cta">
           <a class="btn btn-gold" href="https://www.google.com/maps/search/?api=1&query=Dr.+Brinda%27s+Dental+%26+Aesthetic+Center+Rajajinagar+Bengaluru" target="_blank" rel="noopener">Get directions</a>
           <a class="btn btn-ghost" href="tel:+918217317171">8217 317 171</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/drbrindascare/" target="_blank" rel="noopener">@drbrindascare</a>
         </div>
       </div>
       <iframe class="map reveal" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Clinic location map"
@@ -300,7 +358,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="brand">Dr. Brinda&rsquo;s Dental<span>&amp; Aesthetic Center</span></div>
+        <div class="brand"><img src="assets/logo.png" alt="" width="420" height="440"><span class="brand-txt">Dr. Brinda&rsquo;s Dental<small>&amp; Aesthetic Center</small></span></div>
         <p>Surgical precision and gentle, ethical care for families across Rajajinagar and West Bengaluru.</p>
       </div>
       <div>
@@ -308,7 +366,7 @@
         <ul>
           <li><a href="#services">Services</a></li>
           <li><a href="#doctors">Doctors</a></li>
-          <li><a href="#results">Results</a></li>
+          <li><a href="#aligners">Aligners</a></li>
           <li><a href="#reviews">Reviews</a></li>
         </ul>
       </div>
@@ -326,6 +384,7 @@
         <ul>
           <li>A Block, #518, near Orion Mall,<br>Milk Colony, 2nd Stage,<br>Rajajinagar, Bengaluru 560055</li>
           <li><a href="tel:+918217317171">8217 317 171</a></li>
+          <li><a href="https://www.instagram.com/drbrindascare/" target="_blank" rel="noopener">Instagram &mdash; @drbrindascare</a></li>
           <li>Mon&ndash;Sat: 9 AM &ndash; 8 PM<br>Sunday: by appointment</li>
         </ul>
       </div>

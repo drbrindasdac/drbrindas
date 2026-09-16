@@ -31,12 +31,20 @@ Overwrite the files in `assets/` keeping the same filenames — no code changes 
 
 | File | What it should be | Size |
 |---|---|---|
-| `hero-clinic.jpg` | Best treatment-room / clinic shot | 800×1000 (portrait) |
-| `dr-brinda.jpg` | Dr. Brinda headshot | 600×800 |
+| `dr-brinda.jpg` | Dr. Brinda headshot | 600×800 (portrait) |
 | `dr-swaroop.jpg` | Dr. Swaroop headshot | 600×800 |
-| `before.jpg` / `after.jpg` | Same case, same angle + lighting | 1200×800 |
-| `clinic-1..6.jpg` | Reception, chair, sterilization, imaging, consult, lounge | ~700×560 |
-| `og-cover.jpg` | Social share image | 1200×630 |
+| `staff-1.jpg` | Third team member | 600×800 |
+| `staff-2.jpg` | Fourth team member / clinical team | 600×800 |
+
+Shoot the four portraits the same way — same wall, same distance, same light,
+head and shoulders centred. Mismatched headshots are what makes a team section
+look improvised.
+
+Real clinic photos are already in place (`hero-clinic.jpg`, `clinic-1..3.jpg`,
+`og-cover.jpg`), pulled from the old site.
+
+Two team cards are placeholders — search `TODO` in `index.html` and replace the
+name, role, bio and qualification chips.
 
 Compress before committing (squoosh.app, ~200KB each).
 

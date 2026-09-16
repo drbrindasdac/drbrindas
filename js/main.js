@@ -53,36 +53,6 @@ const countIO = new IntersectionObserver((entries, obs) => {
 }, { threshold: 0.6 });
 document.querySelectorAll("[data-count]").forEach(el => countIO.observe(el));
 
-/* before / after slider */
-const ba = document.getElementById("ba");
-if (ba) {
-  const handle = document.getElementById("baHandle");
-  const set = pct => {
-    const v = Math.max(0, Math.min(100, pct));
-    ba.style.setProperty("--pos", v + "%");
-    handle.setAttribute("aria-valuenow", Math.round(v));
-  };
-  const fromEvent = e => {
-    const r = ba.getBoundingClientRect();
-    const x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
-    set((x / r.width) * 100);
-  };
-  let dragging = false;
-  const start = e => { dragging = true; fromEvent(e); };
-  const move = e => { if (dragging) { e.preventDefault(); fromEvent(e); } };
-  const end = () => { dragging = false; };
-
-  ba.addEventListener("pointerdown", start);
-  addEventListener("pointermove", move, { passive: false });
-  addEventListener("pointerup", end);
-  handle.addEventListener("keydown", e => {
-    const cur = parseFloat(getComputedStyle(ba).getPropertyValue("--pos")) || 50;
-    if (e.key === "ArrowLeft") set(cur - 4);
-    if (e.key === "ArrowRight") set(cur + 4);
-  });
-  set(50);
-}
-
 /* ---- Google reviews ----------------------------------------------------
    assets/reviews.json is refreshed weekly by .github/workflows/reviews.yml.
    The markup already in index.html is the fallback, so a failed fetch or a
