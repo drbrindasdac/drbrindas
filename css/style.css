@@ -222,7 +222,7 @@ footer a:hover{color:var(--gold-soft)}
 @media(max-width:980px){
   .hero-grid,.align-grid,.book-grid,.contact-grid,.doc-grid{grid-template-columns:1fr}
   .hero{padding-top:118px}
-  .hero-frame{aspect-ratio:3/2}
+  .hero-frame{aspect-ratio:4/5}
   .hero-badge{left:auto;right:14px;bottom:-24px;padding:14px 18px}
   .svc-grid,.why-grid{grid-template-columns:repeat(2,1fr)}
   .stats-in{grid-template-columns:repeat(2,1fr)}
