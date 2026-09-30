@@ -414,3 +414,8 @@ img.avatar{object-fit:cover}
 @media(max-width:400px){
   .brand-txt{display:none}
 }
+
+/* brand asset downloads in the footer */
+.assets{margin-top:14px;font-size:.82rem;color:rgba(255,255,255,.4)}
+.assets a{color:rgba(255,255,255,.6);text-decoration:underline;text-underline-offset:2px}
+.assets a:hover{color:var(--gold-soft)}
